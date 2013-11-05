@@ -1,0 +1,32 @@
+.content-box-header
+  %h3 Listing article languages
+.content-box-content
+  = link_to 'New article language', new_admin_article_language_path ,:class => 'button'
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}
+        %th Article
+        %th Language
+        %th Title
+        %th Actions
+    %tfoot
+      %tr
+        %td{:colspan => '6'}
+
+          .clear
+    %tbody
+      - @article_language.each do |article_language|
+        %tr
+          %td
+            %input{:type => 'checkbox'}
+          %td= article_language.article.try(:name)
+          %td
+            = link_to(article_language.language.try(:name), admin_article_language_path(article_language))
+          %td= article_language.title
+          %td
+            / Icons
+            = link_to(image_tag('admin/icon_view.gif'), admin_article_language_path(article_language))
+            = link_to(image_tag('admin/icon_edit.gif'), edit_admin_article_language_path(article_language))
+            = link_to(image_tag('admin/icon_delete.gif'), admin_article_language_path(article_language), :confirm => 'Are You sure?', :method => :delete)

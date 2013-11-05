@@ -1,0 +1,482 @@
+/* ============================================================================
+
+Theme Name: pocket Responsive HTML5 Template
+Theme URI: http://pixel-industry.com/html/pocket
+Description: Pocket is responsive and creative template
+Author: pixel-industry, design Veronica Pongo
+Author URI: http://pixel-industry.com
+Version: 1.0
+
+============================================================================= */
+
+/* -----------------------------------------------------------------------------
+
+        CSS CONTENTS
+        
+        1. CSS reset
+        2. 960 GS by nathan Smith 
+        3. Elements
+            3.1. Accordion
+            3.2. Buttons
+            3.3. Tabs
+            3.4. Information boxes
+
+
+-------------------------------------------------------------------------------- */
+
+
+
+/* 1. CSS RESET
+================================================================================ */
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption,center, cite, code, dd, del, details, dfn, dialog, div, dl, dt, em, embed, fieldset, figcaption, figure, font, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, hr, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, meter, nav, object, ol, output, p, pre, progress, q, rp, rt, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video, xmp { border: 0; margin: 0; padding: 0;}
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {display: block;}
+b, strong {font-weight: bold;}
+img {color: transparent; font-size: 0; vertical-align: middle; -ms-interpolation-mode: bicubic;}
+ol, ul {list-style: none;}
+li {display: list-item;}
+table {border-collapse: collapse; border-spacing: 0;}
+th, td, caption {font-weight: normal; vertical-align: top; text-align: left;}
+q {quotes: none;}
+q:before, q:after {content: ''; content: none;}
+sub, sup, small {font-size: 75%;}
+sub,sup {line-height: 0; position: relative; vertical-align: baseline;}
+sub {bottom: -0.25em;}
+sup {top: -0.5em;}
+svg {overflow: hidden;}
+a{list-style: none; text-decoration: none;}
+a:active{outline: none;}
+a:focus{ outline: none;}
+:focus {outline: 0;}
+
+
+
+/*   2. 960GS BY NATHAN SMITH 
+        licensed under GPL and MIT
+============================================================================= */
+
+/* `Container
+----------------------------------------------------------------------------- */
+.container_12 {margin-left: auto; margin-right: auto; width: 960px;}
+
+/* `Grid >> Global
+----------------------------------------------------------------------------- */
+.grid_1, .grid_2, .grid_3, .grid_4, .grid_5, .grid_6, .grid_7, .grid_8, .grid_9, .grid_10, .grid_11, .grid_12 {display: inline; float: left; margin-left: 10px; margin-right: 10px; margin-bottom: 40px;}
+.push_1, .pull_1, .push_2, .pull_2, .push_3, .pull_3, .push_4, .pull_4, .push_5, .pull_5, .push_6, .pull_6, .push_7, .pull_7, .push_8, .pull_8, .push_9, .pull_9, .push_10, .pull_10, .push_11, .pull_11 {position: relative;}
+
+/* `Grid >> Children (Alpha ~ First, Omega ~ Last)
+----------------------------------------------------------------------------- */
+.alpha {margin-left: 0; }
+.omega {margin-right: 0;}
+
+/* `Grid >> 12 Columns
+----------------------------------------------------------------------------- */
+.container_12 .grid_1 {width: 60px;}
+.container_12 .grid_2 {width: 140px;}
+.container_12 .grid_3 {width: 220px;}
+.container_12 .grid_4 {width: 300px;}
+.container_12 .grid_5 {width: 380px;}
+.container_12 .grid_6 {width: 460px;}
+.container_12 .grid_7 {width: 540px;}
+.container_12 .grid_8 {width: 620px;}
+.container_12 .grid_9 {width: 700px;}
+.container_12 .grid_10 {width: 780px;}
+.container_12 .grid_11 {width: 860px;}
+.container_12 .grid_12 {width: 940px;}
+
+.container_12 .grid_12 .grid_12 {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+
+/* `Prefix Extra Space >> 12 Columns
+----------------------------------------------------------------------------- */
+.container_12 .prefix_1 {padding-left: 80px;}
+.container_12 .prefix_2 {padding-left: 160px;}
+.container_12 .prefix_3 {padding-left: 240px;}
+.container_12 .prefix_4 {padding-left: 320px;}
+.container_12 .prefix_5 {padding-left: 400px;}
+.container_12 .prefix_6 {padding-left: 480px;}
+.container_12 .prefix_7 {padding-left: 560px;}
+.container_12 .prefix_8 {padding-left: 640px;}
+.container_12 .prefix_9 {padding-left: 720px;}
+.container_12 .prefix_10 {padding-left: 800px;}
+.container_12 .prefix_11 {padding-left: 880px;}
+
+/* `Suffix Extra Space >> 12 Columns
+----------------------------------------------------------------------------- */
+.container_12 .suffix_1 {padding-right: 80px;}
+.container_12 .suffix_2 {padding-right: 160px;}
+.container_12 .suffix_3 {padding-right: 240px;}
+.container_12 .suffix_4 {padding-right: 320px;}
+.container_12 .suffix_5 {padding-right: 400px;}
+.container_12 .suffix_6 {padding-right: 480px;}
+.container_12 .suffix_7 {padding-right: 560px;}
+.container_12 .suffix_8 {padding-right: 640px;}
+.container_12 .suffix_9 {padding-right: 720px;}
+.container_12 .suffix_10 {padding-right: 800px;}
+.container_12 .suffix_11 {padding-right: 880px;}
+
+/* `Push Space >> 12 Columns
+----------------------------------------------------------------------------- */
+.container_12 .push_1 {left: 80px;}
+.container_12 .push_2 {left: 160px;}
+.container_12 .push_3 {left: 240px;}
+.container_12 .push_4 {left: 320px;}
+.container_12 .push_5 {left: 400px;}
+.container_12 .push_6 {left: 480px;}
+.container_12 .push_7 {left: 560px;}
+.container_12 .push_8 {left: 640px;}
+.container_12 .push_9 {left: 720px;}
+.container_12 .push_10 {left: 800px;}
+.container_12 .push_11 {left: 880px;}
+
+/* `Pull Space >> 12 Columns
+----------------------------------------------------------------------------- */
+.container_12 .pull_1 {left: -80px;}
+.container_12 .pull_2 {left: -160px;}
+.container_12 .pull_3 {left: -240px;}
+.container_12 .pull_4 {left: -320px;}
+.container_12 .pull_5 {left: -400px;}
+.container_12 .pull_6 {left: -480px;}
+.container_12 .pull_7 {left: -560px;}
+.container_12 .pull_8 {left: -640px;}
+.container_12 .pull_9 {left: -720px;}
+.container_12 .pull_10 {left: -800px;}
+.container_12 .pull_11 {left: -880px;}
+
+/* `Clear Floated Elements
+----------------------------------------------------------------------------- */
+.clear {clear: both; display: block; overflow: hidden; visibility: hidden; width: 0; height: 0;}
+.clearfix:before, .clearfix:after, .container_12:before, .container_12:after { content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0;}
+.clearfix:after, .container_12:after {clear: both;}
+
+
+
+/*   3. ELEMENTS
+============================================================================= */
+
+/* 3.1. Accordion
+----------------------------------------------------------------------------- */
+.grid_3 .accordion .content{
+    padding-left: 0;
+}
+
+.accordion{
+    position: relative;
+    border-bottom: 1px solid #d1d1d1;
+}
+.accordion .title{ 
+    float: left; 
+    margin-bottom: 3px;
+    width: 100%;
+}
+
+.accordion .title a{
+    background: #fff url('/assets/toggle-open.png') no-repeat left center;
+}
+
+.accordion .title:last-child{
+    margin-bottom: 0 !important;
+
+}
+.accordion .content{
+    display:none;
+    float: left;
+    overflow: hidden;
+    padding-left: 56px;
+    padding-bottom: 20px;
+    margin-bottom: 3px;
+}
+
+.accordion-content-wrapp{
+    border-bottom: 1px solid #d1d1d1;
+    float: left;
+    width: 100%;
+}
+.accordion .title a{
+    padding-left: 56px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #252525;
+    cursor:pointer;
+    display: block;    
+    font: bold 13px Rockwell,Rockwell, 'Kameron',sans-serif;    
+    display: block;
+}
+
+
+/* 3.2. Buttons - big button style
+----------------------------------------------------------------------------- */
+p + .btn{
+    margin-top: 14px;
+}
+
+ul + .btn{
+    margin-top: 14px;  
+}
+
+
+.btn{
+    float: right;
+
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+
+    box-shadow: 0 1px 2px #ccc;
+    -webkit-box-shadow: 0 1px 2px #ccc;
+    -moz-box-shadow: 0 1px 2px #ccc;
+    -o-box-shadow: 0 1px 2px #ccc;
+
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+    transition: none;
+
+    cursor: pointer;
+}
+
+.btn-black{
+    float: right;
+    background: url('/assets/btn-black.png') repeat-x;
+    background-position: -0px -36px;
+    border: 1px solid #222;
+
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -o-border-radius: 2px;
+
+    box-shadow: 0 1px 2px #ccc;
+    -webkit-box-shadow: 0 1px 2px #ccc;
+    -moz-box-shadow: 0 1px 2px #ccc;
+    -o-box-shadow: 0 1px 2px #ccc;
+
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    -ms-transition: none;
+    transition: none;
+
+    cursor: pointer;
+}
+
+.btn:hover, .btn-black:hover{
+    background-position: -0px -0px;
+}
+
+.btn a, .btn-black a{
+    color: #fff;
+    font: 14px 'Helvetica Neue', 'Arial', sans-serif;
+    padding: 8px 15px;
+    display: inline-block;
+}
+
+.btn:hover a, .btn-black:hover a{
+    color: #fff;
+}
+
+
+/* 3.5. Tabs
+----------------------------------------------------------------------------- */
+.tabs{
+    width: 100%;
+    overflow: hidden;
+    float: left;
+}
+
+.tabs li{
+    background: #fff;
+    float: left;
+    border-top: 1px solid #cacaca;
+    border-right: 1px solid #cacaca;
+    border-bottom: 1px solid #cacaca;
+    overflow: hidden;
+    position: relative;
+    padding: 0;
+    line-height: 32px;
+}
+
+.tabs li:first-child{
+    border-left: 1px solid #ccc;
+}
+
+.tabs li a{    
+    color: #555;    
+    padding: 0px 16px;
+    font: bold 13px 'Helvetica Neue', Arial, sans-serif;
+    line-height: 33px;
+    padding-top: 2px;
+}
+
+.tabs li.active{
+    border-bottom: 0px solid white;
+    background: #fff;
+}
+
+.tab-content-wrap{
+    border: 1px solid #cacaca;    
+    margin-top: -1px;
+    overflow: hidden;
+    width: 100%;
+    float: left;
+    box-sizing: border-box;
+
+    box-shadow: 0 1px 2px #ccc;
+    -webkit-box-shadow: 0 1px 2px #ccc;
+    -moz-box-shadow: 0 1px 2px #ccc;
+    -o-box-shadow: 0 1px 2px #ccc;
+}
+
+.tab-content{
+    padding: 15px;
+    background: #fff;
+}
+
+/* 3.4. Infromation boxes - INFO BOX
+----------------------------------------------------------------------------- */
+.infobox{
+    background: #e0f2ff;
+    border: 1px solid #c1def2;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.infobox p{
+    background: url('/assets/info-box.png') no-repeat 0 center;
+    margin: 10px;
+    padding-left: 25px;
+    color: #61adb0;
+    text-shadow: 0 1px 0 #fff;
+}
+
+
+/* Infromation boxes - WARNING BOX
+----------------------------------------------------------------------------- */
+.warning-box{
+    background: #f3efd3;
+    border: 1px solid #dedabd;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.warning-box p{
+    background: url('/assets/warning-box.png') no-repeat 0 center;
+    margin: 10px;
+    padding-left: 27px;
+    color: #a19c7a;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* Infromation boxes - SHOP BOX
+----------------------------------------------------------------------------- */
+.shop-box{
+    background: #b4dafb;
+    border: 1px solid #9fc7eb;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.shop-box p{
+    background: url('/assets/shop-box.png') no-repeat 0 center;
+    margin: 10px;
+    padding-left: 27px;
+    color: #fff;
+    text-shadow: 0 1px 0 #a3c2fc;
+}
+
+/* Infromation boxes - NOTE BOX
+----------------------------------------------------------------------------- */
+.note-box{
+    background: #f8f6bc;
+    border: 1px solid #e7e48b;
+    border-radius: 3px;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.note-box p{
+    background: url('/assets/note-box.png') no-repeat 0 center;
+    margin: 10px;
+    padding-left: 25px;
+    color: #989426;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* Infromation boxes - SUCCES BOX
+----------------------------------------------------------------------------- */
+.success-box{
+    background: #ebfdd7;
+    border: 1px solid #cef4a4;
+    border-radius: 3px;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.success-box p{
+    background: url('/assets/success-box.png') no-repeat 0 center;
+    margin: 10px;
+    padding-left: 25px;
+    color: #7eb244;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* Infromation boxes - ERROR BOX
+----------------------------------------------------------------------------- */
+.error-box{
+    background: #fadddd;
+    border: 1px solid #fcc1c1;
+    border-radius: 3px;
+    width: 100%;
+    float: left;
+    margin-bottom: 10px;
+}
+
+.error-box p{
+    background: url('/assets/error-box.png') no-repeat 0 center;
+    margin: 10px;
+    padding-left: 25px;
+    color: #d86d6d;
+    text-shadow: 0 1px 0 #fff;
+}
+
+/* DROPCAPS
+----------------------------------------------------------------------------- */
+.dropcap1{
+    color: #6f6f6f;
+    float: left;
+    margin-right: 10px;
+    font: 76px 'Droid Sans',sans-serif;
+    line-height: 65px;
+}
+
+.dropcap2, .dropcap3{
+    color: #fff;
+    background: #666;
+    float: left;
+    margin-right: 10px;
+    font: bold 39px 'Droid Sans',sans-serif;
+    line-height: 47px;
+    padding: 8px;
+    position: relative;
+    top: 3px;
+}
+
+.dropcap3{
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    font: bold 37px 'Droid Sans',sans-serif;
+    line-height: 40px;
+    padding: 11px;
+    text-align: center;
+}

@@ -1,0 +1,7 @@
+.content-box-header
+  %h3 Editing category
+.content-box-content
+  = form_for @category, :url => { :action => :update } do |f|
+    = render 'form', f: f
+    %input.button{:type => 'submit', :value => 'Save'}
+    = link_to 'Back', admin_categories_path ,:class => 'button'

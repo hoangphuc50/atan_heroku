@@ -1,0 +1,41 @@
+
+- if flash[:notice]
+  %div.flash-notice= flash[:notice]
+  = yield
+- if @article_language.errors.any?
+  #error_explanation.notification.information.png_bg
+    %div.flash-notice
+      %h2
+        = pluralize(@article_language.errors.count, 'error')
+        prohibited this article language from being saved:
+      %ul
+        - @article_language.errors.full_messages.each do |msg|
+          %li= msg
+%fieldset
+  / Set class to "column-left" or "column-right" on fieldsets to divide the form into columns
+  %p
+    %label
+    = f.label :article
+    = f.select :article_id, options_for_select(Article.order('name ASC').all.collect {|c| [c.name, c.id]},(params[:action] == 'edit') ? params[:id_arti] : params[:id] ), :disabled => true
+    -#= f.select :article_id, options_from_collection_for_select(article.order('name ASC'), :id, :name, params[:id_cate] ? params[:id_cate] : @article_language.article.try(:id)), :disabled => true, :prompt => 'Select article'
+  %p
+    %label
+    = f.label :language
+    = f.select :language_id, options_for_select(Language.order('name ASC').all.collect {|c| [c.name, c.id]},@article_language.language.try(:id))
+  %p
+    %label
+    = f.label :title
+    = f.text_field :title, :class => 'text-input large-input'
+  %p
+    %label
+    = f.label :short_description
+    = f.text_field :short_description, :class => 'text-input large-input'
+
+  %p
+    %label
+    = f.label :content
+    -#= f.text_field :content, :class => 'text-input large-input'
+    = f.text_area :content, :class => 'ckeditor'
+    -#%div#editor
+
+

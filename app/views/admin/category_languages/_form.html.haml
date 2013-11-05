@@ -1,0 +1,65 @@
+:javascript
+  jQuery(document).ready(function($) {
+    var form = $("#new_category_language");
+    //var first_name = $("#contact_first_name"); //textbox u are going to validate
+    //var last_name = $("#contact_last_name");
+    //var email=   $("#contact_email");
+    var title=   $("#category_language_title");
+    form.submit(function() {
+    // validation begin before submit
+      if (validateTitle()) {
+      return true;
+      } else { return false; }
+    });
+    function validateTitle() {
+          //validation for empty
+          if (title.val() == ""){
+            title.next('.message').remove();
+            title.after('<span class="message" style="font-weight:bold; color:red;padding-left:10px">Title can\'t blank</span>');
+          return false;
+          } else {title.next('.message').remove();return true;
+          }
+      }
+    });
+- if @category_language.errors.any?
+  #error_explanation.notification.information.png_bg
+    %div.flash-notice
+      %h2
+        = pluralize(@category_language.errors.count, 'error')
+        prohibited this category language from being saved:
+      %ul
+        - @category_language.errors.full_messages.each do |msg|
+          %li= msg
+%fieldset
+  / Set class to "column-left" or "column-right" on fieldsets to divide the form into columns
+  %p
+    %label
+    = f.label :category
+    - if !params[:id_cate].nil?
+      = f.select :category_id, Category.where(:id=>params[:id_cate]).order('name ASC').all.collect {|c| [c.name, c.id]},:selected=>params[:id_cate]
+
+    - else
+      - if @category_language.category.try(:id).nil?
+        = f.select :category_id, Category.order('name ASC').all.collect {|c| [c.name, c.id]},:prompt => 'Select Category'
+      - else
+        = f.text_field :category_id,:disabled => true,:value=>Category.where(:id=>@category_language.category.try(:id)).first().name, :class => 'text-input large-input'
+    -#= f.select :category_id, Category.order('name ASC').all.collect {|c| [c.name, c.id]},:selected =>"#{params[:id_cate] ? params[:id_cate] : @category_language.category.try(:id)}" ,:disabled => true,:prompt => 'Select Category'
+    -#= f.select :category_id, options_from_collection_for_select(Category.order('name ASC'), :id, :name, params[:id_cate] ? params[:id_cate] : @category_language.category.try(:id)), :disabled => true, :prompt => 'Select Category'
+  %p
+    %label
+    = f.label :language
+    - if !params[:id_lang].nil?
+      = f.select :language_id, Language.where(:id=>params[:id_lang]).order('name ASC').all.collect {|c| [c.name, c.id]},:selected=>params[:id_lang]
+    -else
+      - if @category_language.language.try(:id).nil?
+        -if !params[:id_cate].nil?
+          = f.select :language_id, Language.find_by_sql("select * from languages where id not in (select language_id from category_languages cl where cl.category_id=#{params[:id_cate]})").collect {|c| [c.name, c.id]}
+        -else
+          = f.select :language_id, Language.all.collect {|c| [c.name, c.id]}
+      -else
+        = f.text_field :language_id,:disabled => true,:value=>Language.where(:id=>@category_language.language.try(:id)).first().name, :class => 'text-input large-input'
+      -#= f.select :language_id, Language.order('name ASC').all.collect {|c| [c.name, c.id]},:selected =>"#{params[:id_lang]? params[:id_lang] : @category_language.language.try(:id)}"
+  %p
+    %label
+    = f.label :title
+    = f.text_field :title, :class => 'text-input large-input'

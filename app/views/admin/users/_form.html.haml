@@ -1,0 +1,29 @@
+- if @users.errors.any?
+  #error_explanation.notification.information.png_bg
+    %div.flash-notice
+      %h2
+        = pluralize(@users.errors.count, 'error')
+        prohibited this user from being saved:
+      %ul
+        - @users.errors.full_messages.each do |msg|
+          %li= msg
+%fieldset
+  / Set class to "column-left" or "column-right" on fieldsets to divide the form into columns
+  %p
+    %label
+    = f.label :name
+    = f.text_field :name, :class => 'text-input small-input'
+
+  %p
+    %label
+    = f.label :email
+    = f.text_field :email, :class => 'text-input small-input'
+  - if @ab!=0
+    %p
+      %label
+      = f.label :password
+      = f.password_field :password, :class => 'text-input small-input'
+    %p
+      %label
+      = f.label :password_confirmation
+      = f.password_field :password_confirmation, :class => 'text-input small-input'

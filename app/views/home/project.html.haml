@@ -1,0 +1,83 @@
+%section.page-title
+  .title.pattern-default
+    %h1= @project_detail.title
+    %span.subtitle
+#content-container
+  .content-wrapper.clearfix
+    .container_12
+      =raw @project_detail.content
+      .clearfix
+      %article.grid_12.portfolio-box{style: "margin-bottom: 0px;"}
+        %section.divider-with-title.clearfix
+          .title
+            %h4 Recent Work
+          %a.title-link{href: "/projects"} View more
+        -i=0
+        - @project_same_category.each do |row|
+        -i=i+1
+          -if i==1
+            %article.grid_3.alpha
+              %figure.portfolio
+                .img-hover
+                  %a.portfolio-image{href: "/project/#{row.id}"}
+                    %img{alt: "portfolio", src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "220"}/
+                  .mask
+                    %a.thumb.info{href: "/project/#{row.id}", title: row.title}
+                %figcaption
+                  .caption-title
+                    %a{href: "/project/#{row.id}"}
+                      %p.title
+                        =row.title
+                    %p.subtitle
+                      -category_id=Article.where("id=#{row.article_id}").first().category_id
+                      =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+          -else
+            -if i==4
+              %article.grid_3.omega
+                %figure.portfolio
+                  .img-hover
+                    %a.portfolio-image{href: "/project/#{row.id}"}
+                      %img{alt: "portfolio", src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "220"}/
+                    .mask
+                      %a.thumb.info{href: "/project/#{row.id}", title: row.title}
+                  %figcaption
+                    .caption-title
+                      %a{href: "/project/#{row.id}"}
+                        %p.title
+                          =row.title
+                      %p.subtitle
+                        -category_id=Article.where("id=#{row.article_id}").first().category_id
+                        =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+            -else
+              %article.grid_3
+                %figure.portfolio
+                  .img-hover
+                    %a.portfolio-image{href: "/project/#{row.id}"}
+                      %img{alt: "portfolio", src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "220"}/
+                    .mask
+                      %a.thumb.info{href: "/project/#{row.id}", title: row.title}
+                  %figcaption
+                    .caption-title
+                      %a{href: "/project/#{row.id}"}
+                        %p.title
+                          =row.title
+                      %p.subtitle
+                        -category_id=Article.where("id=#{row.article_id}").first().category_id
+                        =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+        .clear
+:javascript
+  jQuery(window).load(function() {
+      //current item slider
+      jQuery('#slider1').nivoSlider({controlNav: false});
+
+      // bottom page carousel
+      jQuery('#carousel-1').carouFredSel({
+          items: 4,
+          height: 220,
+          prev: '.carousel-nav .prev',
+          next: '.carousel-nav .next',
+          auto: false,
+          scroll: 1
+      });
+
+  });

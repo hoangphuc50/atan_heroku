@@ -1,0 +1,8 @@
+.content-box-header
+  %h3 New user
+.content-box-content
+  = form_for @users, url: admin_users_path, html: { method: :post } do |f|
+    -@ab=1
+    = render 'form', f: f
+    %input.button{:type => 'submit', :value => 'Save'}
+    = link_to 'Back', admin_users_path ,:class => 'button'

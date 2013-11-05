@@ -1,0 +1,143 @@
+!!!
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %title="Phuc test"
+    = stylesheet_link_tag 'home/styles'
+    = stylesheet_link_tag 'home/captions'
+    = stylesheet_link_tag 'home/css'
+    = stylesheet_link_tag 'home/flexslider'
+    = stylesheet_link_tag 'home/font-awesome'
+    = stylesheet_link_tag 'home/green'
+    = stylesheet_link_tag 'home/nivo-slider'
+    = stylesheet_link_tag 'home/pixel-industry'
+    = stylesheet_link_tag 'home/prettyPhoto'
+    = stylesheet_link_tag 'home/settings'
+    = stylesheet_link_tag 'home/basic'
+    = stylesheet_link_tag 'home/style_002'
+    = stylesheet_link_tag 'home/style'
+
+    = javascript_include_tag 'home/jquery'
+    = javascript_include_tag 'home/jquery.carouFredSel-6.0.0-packed'
+    = javascript_include_tag 'home/jquery.touchSwipe-1.2.5'
+    = javascript_include_tag 'home/comment-reply.min'
+    = javascript_include_tag 'home/jquery.themepunch.plugins.min'
+    = javascript_include_tag 'home/jquery.themepunch.revolution.min'
+    = javascript_include_tag 'home/jquery.flexslider-min'
+    = javascript_include_tag 'home/main'
+    = javascript_include_tag 'home/jquery.nivo.slider'
+%body.pattern-default.homepage
+  %header#header.clearfix{style: "display: block; top: 0px;"}
+    %div{style: "position:absolute; top:3px;right:30px"}
+      %span{style:"font-size:11px;font-weight:bold"}Choose language:
+      -Language.where(enable: true).all.each do |row|
+        = link_to(row.name+" | ", "?lang=#{row.language_code}")
+
+    %section#header-inner.clearfix
+      / logo start
+      %section#logo
+        %a{href: ""}
+          %img{alt: "Logo", src: "/assets/logo.png"}/
+      / #logo end
+      / nav container start
+      %section#nav-container
+        / main navigation start
+        %nav#nav
+          %ul#menu-menu.menu{style: "display: none;"}
+            %li.menu-item.current-menu-parent
+              %a{href: "/"}
+                %i.icon-nav.icon-home>
+                =I18n.t("front_end.top_menu.home")
+              %span
+                =I18n.t("front_end.top_menu.home__description")
+            %li.menu-item{id: ""}
+              %a{href: "/about_us"}
+                %i.icon-nav.icon-columns>
+                =I18n.t("front_end.top_menu.atansolutions")
+              %span
+                =I18n.t("front_end.top_menu.atansolutions_description")
+              %ul.sub-menu
+                %li.menu-item{id: ""}
+                  %a{href: "/about_us"}
+                    =I18n.t("front_end.top_menu.atansolutions_about_us")
+                %li.menu-item{id: ""}
+                  %a{href: "/services"}
+                    =I18n.t("front_end.top_menu.atansolutions_services")
+            %li.menu-item{id: ""}
+              %a{href: "/projects"}
+                %i.icon-nav.icon-picture>
+                =I18n.t("front_end.top_menu.our_project")
+              %span
+                =I18n.t("front_end.top_menu.our_project_description")
+            %li.menu-item{id: ""}
+              %a{href: "/news"}
+                %i.icon-nav.icon-book>
+                =I18n.t("front_end.top_menu.news")
+              %span
+                =I18n.t("front_end.top_menu.news_description")
+            %li.menu-item{id: ""}
+              %a{href: "/contact"}
+                %i.icon-nav.icon-envelope>
+                =I18n.t("front_end.top_menu.contact")
+              %span
+                =I18n.t("front_end.top_menu.contact_description")
+            -#= link_to(image_tag('admin/icon_view.gif'), '?lang_id=2')
+            -#= link_to(image_tag('admin/icon_view.gif'), '?lang_id=2')
+
+        / main navigation end
+        / responsive navigation start
+        :javascript
+          jQuery(function(){
+          jQuery('select#menu-menu-1').bind('change', function ()
+            {
+              var url = jQuery(this).val(); // get selected value
+              if (url) { // require a URL
+                  window.location = url; // redirect
+              }
+              return false;
+            });
+          });
+        .menu-menu-container
+          %select#menu-menu-1.menu.dropdown-menu
+            %option.blank{value: ""} – Main Menu –
+            %option.menu-item{value: "/"} Home
+            %option.menu-item{value: "/about_us"} About Atansolutions
+            %option.menu-item{value: "/about_us"} - About us
+            %option.menu-item{value: "/services"} - Services
+            %option.menu-item{value: "/projects"} Projects
+            %option.menu-item{value: "/news"} News
+            %option.menu-item{value: "/contact"} Contact
+
+
+        / responsive navigation end
+      / nav container end
+  / header end
+  %section.top-shadow
+  = yield
+/ social icons end
+/ content-wrapper end
+/ footer wrapper start
+#footer-wrapper.clearfix
+  .content-wrapper.footer_new
+    %section.copyright-container
+      .copyright.container_12
+        .grid_6.copy-info
+          %p
+            =I18n.t("front_end.footer.copyright")
+        .grid_6.footer-social
+          / social icons start
+          %p{style: "\r\n    text-align: right;\r\n    font-size: 12px;\r\n"}
+            =I18n.t("front_end.footer.social")
+          %ul
+            %li
+              %a{href: "", target: "_BLANK", title: "dribbble"}
+                %i.pixons.pixons-dribbble
+            %li
+              %a{href: "", target: "_BLANK", title: "twitter-1"}
+                %i.pixons.pixons-twitter-1
+            %li
+              %a{href: "", target: "_BLANK", title: "facebook-1"}
+                %i.pixons.pixons-facebook-1
+            %li
+              %a{href: "", target: "_BLANK", title: "wordpress"}
+                %i.pixons.pixons-wordpress
+  / copyright container end

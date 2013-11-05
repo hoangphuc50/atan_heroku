@@ -1,0 +1,87 @@
+:javascript
+  jQuery(document).ready(function($) {
+    var form = $("#new_contact");
+    var first_name = $("#contact_first_name"); //textbox u are going to validate
+    var last_name = $("#contact_last_name");
+    var email=   $("#contact_email");
+    var message=   $("#contact_message");
+    var error_messages=$("#error_messages");
+    form.submit(function() {
+    // validation begin before submit
+    if ( validateFirstname() && validateLastname() && validateEmail() && validateMessage()) {
+    return true;
+    } else { return false; }
+    });
+    function validateFirstname() {
+    //validation for empty
+    if (first_name.val() == "Your First Name" || first_name.val() == "" ){
+      error_messages.next('.first_name').remove();
+      error_messages.after('<p class="first_name" style="font-weight:bold; color:red;padding-bottom:10px">First name can\'t blank</p>');
+    return false;
+    } else {error_messages.next('.first_name').remove();return true;
+    }
+  }
+  function validateLastname() {
+      //validation for empty
+      if (last_name.val() == "Your Last Name" || last_name.val() == "" ){
+        error_messages.next('.last_name').remove();
+        error_messages.after('<p class="last_name" style="font-weight:bold; color:red;padding-bottom:10px">Last name can\'t blank</p>');
+      return false;
+      } else {error_messages.next('.last_name').remove();return true;
+      }
+  }
+  function validateEmail() {
+        //validation for empty
+        regex = /[A-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[A-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[A-z0-9](?:[A-z0-9-]*[A-z0-9])?\.)+[A-z0-9](?:[A-z0-9-]*[A-z0-9])?/;
+
+        if (email.val() == "Your Email" || email.val() == "" ||!regex.test(email.val())){
+          error_messages.next('.email').remove();
+          error_messages.after('<p class="email" style="font-weight:bold; color:red;padding-bottom:10px">Email can\'t blank and not right format</p>');
+        return false;
+        } else {error_messages.next('.email').remove();return true;
+        }
+    }
+  function validateMessage() {
+        //validation for empty
+        if (message.val() == ""){
+          error_messages.next('.message').remove();
+          error_messages.after('<p class="message" style="font-weight:bold; color:red;">Message can\'t blank</p>');
+        return false;
+        } else {error_messages.next('.message').remove();return true;
+        }
+    }
+  });
+%section.page-title
+  .title.pattern-default
+    %h1 Contact
+    %p.subtitle
+      The Very Best Way To Get in Touch With Us
+/ page-title end
+#content-container
+  / content wrapper start
+  .content-wrapper.multiple.clearfix
+    / container_12 start
+    .container_12
+      .grid_12
+        =raw @article_map.content
+        -#.grid_8.alpha
+        -#  %h4 Leave us a message
+        -#  #wpcf7-f137-p56-o1.wpcf7
+        -#    = form_for @inquiry, :url => { :action => :create },:class=>"wpcf7-form" do |f|
+        -#      = render :partial => 'form', :object => f
+        .grid_8.alpha
+          %h4 Leave us a message
+          #wpcf7-f137-p56-o1.wpcf7
+            = form_for @inquiry, :url => { :action => :create },:class=>"wpcf7-form" do |f|
+              = render :partial => 'form', :object => f
+        =raw @contact_info.content
+    / container_12 end
+  / content-wrapper end
+/ footer wrapper start
+%script{src: "http://maps.google.com/maps/api/js?sensor=true&ver=1.0", type: "text/javascript"}
+%script{src: "http://pixel-industry.com/wordpress/pocket/wp-content/themes/pocket/js/jquery.ui.map.full.min.js?ver=1.0", type: "text/javascript"}
+-#
+-#
+-#%h1 Want to get in touch?
+-#= form_for @inquiry, :url => { :action => :create } do |f|
+-#  = render :partial => 'form', :object => f

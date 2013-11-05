@@ -1,0 +1,90 @@
+:javascript
+  jQuery(function(){
+    jQuery(".pagination a.number").filter(function(){
+        return this.href == location.href.replace(/#.*/, "");
+    }).addClass("current");
+  });
+.content-box-header
+  %h3 Detail category #{@category.name}
+.content-box-content
+  %p
+    %strong Name:
+    = @category.name
+  %p
+    %strong Parent category:
+    = @category.parent.try(:name)
+  = link_to 'New category language', new_admin_category_language_path(:id_cate=>@category.id) ,:class => 'button'
+  - @category_language=CategoryLanguage.where(:category_id=>@category.id)
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}
+        /%th Category
+        %th Language
+        %th Title category
+        %th Actions
+    %tfoot
+      %tr
+        %td{:colspan => '6'}
+          .clear
+    %tbody
+      - @category_language.each do |category_language|
+        %tr
+          %td
+            %input{:type => 'checkbox'}
+          /%td= category_language.category.try(:name)
+          %td= category_language.language.try(:name)
+          %td= category_language.title
+          %td
+            / Icons
+            /= link_to(image_tag('admin/icon_view.gif'), admin_category_language_path(category_language))
+            = link_to(image_tag('admin/icon_edit.gif'), edit_admin_category_language_path(category_language))
+            = link_to(image_tag('admin/icon_delete.gif'), admin_category_language_path(category_language), :confirm => 'Are you sure?', :method => :delete)
+
+  = link_to 'New Article', new_admin_article_path ,:class => 'button'
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}
+        %th Name article
+        - @language=Language.all
+        - @language.each do |language|
+          %th
+            =language.language_code
+        %th Actions
+    %tfoot
+      %tr
+        %td{:colspan => '6'}
+          .pagination
+            -i=0
+            -@total_page.each do |row|
+              -i=i+1
+              %a.number{:href => "?page=#{i}", :title => "#{i}"} #{i}
+          / End .pagination
+          .clear
+    %tbody
+      - unless @articles.nil?
+        - @articles.each do |article|
+          %tr
+            %td
+              %input{:type => 'checkbox'}
+            %td
+              = link_to(article.name, admin_article_path(article))
+            - @language=Language.all
+            - @language.each do |language|
+              %th
+                - @article_language=ArticleLanguage.where(:article_id=>article.id,:language_id=>language.id).first()
+                -if @article_language.nil?
+                  = link_to(image_tag('admin/icon_add.png'), new_admin_article_language_path(:id_arti=>article.id,:id_lang=>language.id))
+                -else
+                  = link_to(image_tag('admin/icon_edit.gif'), edit_admin_article_language_path(@article_language))
+            %td
+              / Icons
+              = link_to(image_tag('admin/icon_view.gif'), admin_article_path(article))
+              = link_to(image_tag('admin/icon_edit.gif'), edit_admin_article_path(article))
+              = link_to(image_tag('admin/icon_delete.gif'), admin_article_path(article), :confirm => 'Are You sure?', :method => :delete)
+
+  = link_to 'Edit', edit_admin_category_path(@category),:class => 'button'
+  = link_to 'Back', admin_categories_path,:class => 'button'

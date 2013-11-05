@@ -1,0 +1,15 @@
+%section.page-title
+  .title.pattern-default
+    %h1
+      =@service_detail.title
+    %span.subtitle
+/ page-title end
+#content-container
+  / content wrapper start
+  .content-wrapper.multiple.clearfix
+    / container_12 start
+    .container_12
+      .grid_12
+        =raw @service_detail.content
+    / container_12 end
+  / content-wrapper end

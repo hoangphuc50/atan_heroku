@@ -1,0 +1,50 @@
+%section.page-title
+  .title.pattern-default
+    %h1 News
+    %span.subtitle
+      See the Latest News from Our Company
+/ content wrapper start
+#content-container
+  .content-wrapper.clearfix
+    / container_12 start
+    .container_12
+      / blog posts container start
+      %ul.grid_8.content-sidebar-right
+        / blog post start
+        -@news_list_all.each do |row|
+          %li.blog-post.clearfix{id: ""}
+            %section.post-title-container
+              %a{href: "/article/#{row.id}"}
+                %h3= row.title
+            %article.post-body
+              .post-category
+                %a.category-standard{href: "/article/#{row.id}"}
+                  %img{alt: row.title, src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "180",height:"140"}
+              %p
+                =row.short_description
+              .btn
+                %a{href: "/article/#{row.id}"} Read more
+          / blog post end
+          %li.divider
+      / blog posts container end
+      / sidebar start
+      %aside.grid_4.aside.right
+        %ul.aside-widgets
+          %li#list_categories_widget-2.widget.widget_list_categories_widget.clearfix
+            %h5 News Categories
+            %ul
+              -@news_category_all.each do |row|
+                %li
+                  = link_to(row.title,news_path(:id=>row.category_id))
+          %li#archives-2.widget.widget_archive.clearfix
+            %h5 Archive
+            %ul
+              %li
+                %a{href: "", title: "March 2013"} March 2013
+              %li
+                %a{href: "", title: "February 2013"} February 2013
+              %li
+                %a{href: "", title: "January 2013"} January 2013
+      / sidebar end
+    / container_12 end
+  / content-wrapper end

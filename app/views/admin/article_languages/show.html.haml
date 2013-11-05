@@ -1,0 +1,15 @@
+.content-box-header
+  %h3 Detail category language
+.content-box-content
+  %p
+    %strong category:
+    = @category_language.category.try(:name)
+  %p
+    %strong Language:
+    = @category_language.language.try(:name)
+  %p
+    %strong Title:
+    = @category_language.title
+
+  = link_to 'Edit', edit_admin_category_language_path(@category_language),:class => 'button'
+  = link_to 'Back', admin_category_languages_path,:class => 'button'

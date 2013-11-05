@@ -1,0 +1,71 @@
+%section.page-title
+  .title.pattern-default
+    %h1 Contact
+    %span.subtitle
+      The Very Best Way To Get in Touch With Us
+/ page-title end
+#content-container
+  / content wrapper start
+  .content-wrapper.multiple.clearfix
+    / container_12 start
+    .container_12
+      .grid_12
+        #map_canvas
+        :javascript
+          jQuery(function(){
+              var yourStartLatLng = new google.maps.LatLng(48.880833, 2.42333);
+              jQuery('#map_canvas').gmap({
+                  'center': yourStartLatLng,
+                  'zoom': 15,
+                  'disableDefaultUI':false,
+                  'scrollwheel' : true,
+                  'callback': function() {
+                      var self = this;
+                      self.addMarker({
+                          'position': this.get('map').getCenter()
+                      });
+                  }
+              });});
+        .grid_8.alpha
+          %h4 Leave us a message
+          #wpcf7-f137-p56-o1.wpcf7
+            %form.wpcf7-form{action: "/wordpress/pocket/contact/#wpcf7-f137-p56-o1", method: "post"}
+              %div{style: "display: none;"}
+                %input{name: "_wpcf7", type: "hidden", value: "137"}/
+                %input{name: "_wpcf7_version", type: "hidden", value: "3.3.3"}/
+                %input{name: "_wpcf7_unit_tag", type: "hidden", value: "wpcf7-f137-p56-o1"}/
+                %input{name: "_wpnonce", type: "hidden", value: "611b9b5713"}/
+              %p
+                %span.wpcf7-form-control-wrap.your-name
+                  %input.wpcf7-form-control.wpcf7-text.wpcf7-validates-as-required.text{name: "your-name", size: "40", type: "text", value: "Your First Name"}/
+                %span.wpcf7-form-control-wrap.your-last-name
+                  %input.wpcf7-form-control.wpcf7-text.wpcf7-validates-as-required.text{name: "your-last-name", size: "40", type: "text", value: "Your Last Name"}/
+                %span.wpcf7-form-control-wrap.your-email
+                  %input.wpcf7-form-control.wpcf7-text.wpcf7-email.wpcf7-validates-as-required.wpcf7-validates-as-email.email{name: "your-email", size: "40", type: "text", value: "Your Email..."}/
+                %br/
+                %span.wpcf7-form-control-wrap.your-message
+                  %textarea.wpcf7-form-control.wpcf7-textarea.textarea{cols: "40", name: "your-message", rows: "10"} Your message...
+                %br/
+                %input.wpcf7-form-control.wpcf7-submit.submit{type: "submit", value: "Send Message"}/
+              .wpcf7-response-output.wpcf7-display-none
+        .grid_4.omega
+          %h4 Contact info
+          %p 25-Th Street Name, Florida, CA 29637, USA
+          %p Consectetur adipiscing elit aeneane lorem lipsum, condimentum ultrices consequ atvehicula mauris lipsum adipiscing lipsum aenean orci lorem.
+          %ul
+            %li Phone: (123) 456-7890
+            %li Fax: (123) 456-7890
+            %li Mob: (123) 456-7890
+          %ul
+            %li
+              Email:
+              %a{href: "http://pixel-industry.com/html/pocket/contact.html#"} contact@pocket.com
+            %li
+              Web:
+              %a{href: "http://pixel-industry.com/html/pocket/contact.html#"} www.pocket.com
+        .clear
+    / container_12 end
+  / content-wrapper end
+/ footer wrapper start
+%script{src: "http://maps.google.com/maps/api/js?sensor=true&ver=1.0", type: "text/javascript"}
+%script{src: "http://pixel-industry.com/wordpress/pocket/wp-content/themes/pocket/js/jquery.ui.map.full.min.js?ver=1.0", type: "text/javascript"}

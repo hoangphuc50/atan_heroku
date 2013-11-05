@@ -1,0 +1,47 @@
+.content-box-header
+  %h3 Listing category languages
+.content-box-content
+  = link_to 'New category language', new_admin_category_language_path ,:class => 'button'
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}
+        %th Category
+        %th Language
+        %th Title
+        %th Actions
+    -#%tfoot
+    -#  %tr
+    -#    %td{:colspan => '6'}
+    -#      .bulk-actions.align-left
+    -#        %select{:name => 'dropdown'}
+    -#          %option{:value => 'option1'} Choose an action...
+    -#          %option{:value => 'option2'} Edit
+    -#          %option{:value => 'option3'} Delete
+    -#        %a.button{:href => '#'} Apply to selected
+    -#      .pagination
+    -#        %a{:href => '#', :title => 'First Page'} &laquo; First
+    -#        %a{:href => '#', :title => 'Previous Page'} &laquo; Previous
+    -#        %a.number{:href => '#', :title => '1'} 1
+    -#        %a.number{:href => '#', :title => '2'} 2
+    -#        %a.number.current{:href => '#', :title => '3'} 3
+    -#        %a.number{:href => '#', :title => '4'} 4
+    -#        %a{:href => '#', :title => 'Next Page'} Next &raquo;
+    -#        %a{:href => '#', :title => 'Last Page'} Last &raquo;
+    -#      / End .pagination
+    -#      .clear
+    %tbody
+      - @category_language.each do |category_language|
+        %tr
+          %td
+            %input{:type => 'checkbox'}
+          %td= category_language.category.try(:name)
+          %td
+            = link_to(category_language.language.try(:name), admin_category_language_path(category_language))
+          %td= category_language.title
+          %td
+            / Icons
+            = link_to(image_tag('admin/icon_view.gif'), admin_category_language_path(category_language))
+            = link_to(image_tag('admin/icon_edit.gif'), edit_admin_category_language_path(category_language))
+            = link_to(image_tag('admin/icon_delete.gif'), admin_category_language_path(category_language), :confirm => 'Are you sure?', :method => :delete)

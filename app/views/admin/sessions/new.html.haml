@@ -1,0 +1,46 @@
+%html{:xmlns => "http://www.w3.org/1999/xhtml"}
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}/
+    %title= I18n.t('general.website_title')
+    = stylesheet_link_tag 'admin/application'
+    = javascript_include_tag 'admin/application'
+    /[if IE] <link rel="stylesheet" type="text/css" href="/assets/ie.css" media="screen"/>
+    = yield :javascripts
+    = csrf_meta_tag
+  %body#login
+    #login-wrapper.png_bg
+      #login-top
+        %h1 Simpla Admin
+        / Logo (221px width)
+        /%img#logo{:alt => "Simpla Admin logo", :src => "/assets/admin/logo.png"}/
+      / End #logn-top
+      #login-content
+        = form_for(:session, url: admin_sessions_path) do |f|
+          .notification.information.png_bg
+            - if flash[:error]
+              %div.flash-notice= flash[:error]
+              = yield
+            - else
+              %div Just click "Sign In".
+
+          %p
+            = f.label :email
+            = f.text_field :email ,:class => 'text-input'
+          .clear
+          %p
+            = f.label :password
+            = f.password_field :password,:class => 'text-input'
+          .clear
+          %p#remember-password
+            %input{:type => "checkbox"}>
+            Remember me
+          .clear
+          %p
+            %input.button{:type=>"submit", :value => "Sign In"}
+          .clear
+          %p#forget-password
+            =link_to 'Forgot your password?','/admin/lostpassword'
+            |
+            =link_to 'Back to Home','/'
+      / End #login-content
+    / End #login-wrapper

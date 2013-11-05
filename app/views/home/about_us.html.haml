@@ -1,0 +1,15 @@
+%section.page-title
+  .title.pattern-default
+    %h1 About Us
+    %span.subtitle
+      We love What We Do
+/ page-title end
+#content-container
+  .content-wrapper.clearfix.multiple
+    .container_12
+      .grid_12
+        = raw @about_us_article
+        = raw @about_us_article_slide
+        = raw @about_us_article_member
+        .clear
+  =raw @about_us_product_slide

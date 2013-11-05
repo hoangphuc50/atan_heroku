@@ -1,0 +1,132 @@
+=raw @slide
+/ END REVOLUTION SLIDER
+#content-container
+  / content wrapper start
+  .content-wrapper.multiple.clearfix
+    / container_12 start
+    .container_12
+      .grid_12{style: "margin-bottom: 0px;"}
+        -@top_3_services.each do |row|
+          .grid_4.service.alpha
+            .icon-container
+              %a.icon-th.service-icon{href: ""}
+            %a{href: "/services"}
+              %h4
+                =row.title
+            %p
+              =row.short_description.at(0..100)+"..."
+        .clear
+        =raw @about_us_slide
+        %article.grid_12.portfolio-box{style: "margin-bottom: 0px;"}
+          %section.divider-with-title.clearfix
+            .title
+              %h4 Recent Work
+            %a.title-link{href: "/projects"} View more
+          -i=0
+          - @top_4_projects.each do |row|
+          -i=i+1
+            -if i==1
+              %article.grid_3.alpha
+                %figure.portfolio
+                  .img-hover
+                    %a.portfolio-image{href: "/project/#{row.id}"}
+                      %img{alt: "portfolio", src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "220"}/
+                    .mask
+                      %a.thumb.info{href: "/project/#{row.id}", title: row.title}
+                  %figcaption
+                    .caption-title
+                      %a{href: "/project/#{row.id}"}
+                        %p.title
+                          =row.title
+                      %p.subtitle
+                        -category_id=Article.where("id=#{row.article_id}").first().category_id
+                        =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+            -else
+              -if i==4
+                %article.grid_3.omega
+                  %figure.portfolio
+                    .img-hover
+                      %a.portfolio-image{href: "/project/#{row.id}"}
+                        %img{alt: "portfolio", src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "220"}/
+                      .mask
+                        %a.thumb.info{href: "/project/#{row.id}", title: row.title}
+                    %figcaption
+                      .caption-title
+                        %a{href: "/project/#{row.id}"}
+                          %p.title
+                            =row.title
+                        %p.subtitle
+                          -category_id=Article.where("id=#{row.article_id}").first().category_id
+                          =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+              -else
+                %article.grid_3
+                  %figure.portfolio
+                    .img-hover
+                      %a.portfolio-image{href: "/project/#{row.id}"}
+                        %img{alt: "portfolio", src: "/site_images/#{Article.where("id=#{row.article_id}").first().images}", width: "220"}/
+                      .mask
+                        %a.thumb.info{href: "/project/#{row.id}", title: row.title}
+                    %figcaption
+                      .caption-title
+                        %a{href: "/project/#{row.id}"}
+                          %p.title
+                            =row.title
+                        %p.subtitle
+                          -category_id=Article.where("id=#{row.article_id}").first().category_id
+                          =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+
+          .clear
+        %article.grid_6.jcarousellite.blog-widget-carousel.clearfix.vertical.alpha
+          %section.divider-with-title.carousel.clearfix
+            .title
+              %h4 Latest news
+            %ul.carousel-nav
+              %li
+                %a.carousel-36-nav.prev{href: "#", style: "display: block;"}
+              %li
+                %a.carousel-36-nav.next{href: "#", style: "display: block;"}
+          .caroufredsel_wrapper{style: "display: block; text-align: start; float: none; position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 460px; height: 208px; margin: 0px; overflow: hidden;"}
+            %ul#carousel-36.carousel-li{style: "text-align: left; float: none; position: absolute; top: 0px; right: auto; bottom: auto; left: 0px; margin: 0px; height: 208px; width: 460px;"}
+              -@top_5_article.each do |row|
+                %li
+                  .post-info
+                    -date_post=row.created_at
+                    %span.date
+                      =date_post.strftime("%d")
+                    %span.month
+                      =date_post.strftime("%B")
+                  .blog-widget-description
+                    %a{href: "/article/#{row.id}"}
+                      %h4
+                        =row.title
+                    %p=row.short_description.at(0..100)+"..."
+
+          :javascript
+            var carouselBlog = jQuery('#carousel-36');
+            carouselBlog.carouFredSel({
+                items: 2,
+                responsive: true,
+                prev: '.carousel-36-nav.prev',
+                next: '.carousel-36-nav.next',
+                auto: false,
+                direction: 'up',
+                scroll: 1,
+                width: 'auto',
+                height: 'variable',
+                items: {
+                    width: 'auto',
+                    height: 'variable'
+                },
+                swipe: {
+                    ontouch : true
+                },
+                onCreate : function () {
+                    jQuery(window).on('resize', function(){
+                    var height = 2 * 10;
+                        carouselBlog.children('li:lt(2)').each(function(){ height += jQuery(this).height(); });
+                        carouselBlog.parent().add(carouselBlog).css('height', height + 'px');
+                        carouselBlog.closest('.caroufredsel_wrapper').css('width', carouselBlog.children().first().width() + 'px');
+                    }).trigger('resize');
+                }
+            });
+        =raw @comment_slide

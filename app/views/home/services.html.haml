@@ -1,0 +1,24 @@
+%section.page-title
+  .title.pattern-default
+    %h1 Services
+    %span.subtitle
+      Here Is What We Do And How We Do It
+/ page-title end
+#content-container
+  .content-wrapper.clearfix.multiple
+    .container_12
+      .grid_12
+        = raw @about_my_services
+        .clear
+        %h4 Services overview
+        - @all_services.each do |service|
+          .grid_4.service.omega
+            .icon-container
+              %a.icon-th.service-icon{href: "service/#{service.id}"}
+            %a{href: "service/#{service.id}"}
+              %h4= service.title
+            %p= service.short_description
+
+
+        .clear
+=raw @slide_page_services

@@ -1,0 +1,14 @@
+.content-box-header
+  %h3 New category_language
+.content-box-content
+  = form_for @category_language, url: admin_category_languages_path, html: { method: :post } do |f|
+    = render 'form', f: f
+    -if !params[:id_cate].nil?
+      -if Language.find_by_sql("select * from languages where id not in (select language_id from category_languages cl where cl.category_id=#{params[:id_cate]})").count() != 0
+        %input.button{:type => 'submit', :value => 'Save'}
+      -else
+        %input.button{:type => 'submit', :value => 'No language to save',:disabled => true}
+    -else
+    -if !@category_language.category.try(:id).nil?
+      %input.button{:type => 'submit', :value => 'Save'}
+    = link_to 'Back', admin_category_path(:id=>params[:id_cate] ? params[:id_cate] : '') ,:class => 'button'

@@ -1,0 +1,30 @@
+- if @language.errors.any?
+  #error_explanation.notification.information.png_bg
+    %div.flash-notice
+      %h2
+        = pluralize(@language.errors.count, 'error')
+        prohibited this language from being saved:
+      %ul
+        - @language.errors.full_messages.each do |msg|
+          %li= msg
+%fieldset
+  / Set class to "column-left" or "column-right" on fieldsets to divide the form into columns
+  %p
+    %label
+    = f.label :name
+    = f.text_field :name, :class => 'text-input small-input'
+
+  %p
+    %label
+    = f.label :language_code
+    = f.text_field :language_code, :class => 'text-input small-input'
+  %p
+    %label
+    = f.label :description
+    = f.text_field :description, :class => 'text-input large-input'
+  %p
+    %label
+    = f.check_box :default
+    Default
+    = f.check_box :enable
+    Enable

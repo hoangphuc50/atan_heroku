@@ -1,0 +1,612 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.9
+-- Dumped by pg_dump version 9.1.9
+-- Started on 2013-11-01 17:07:11 ICT
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 174 (class 3079 OID 11681)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 1965 (class 0 OID 0)
+-- Dependencies: 174
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 167 (class 1259 OID 50577)
+-- Dependencies: 5
+-- Name: article_languages; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE article_languages (
+    id integer NOT NULL,
+    article_id integer,
+    language_id integer,
+    title character varying(255),
+    short_description character varying(255),
+    content character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.article_languages OWNER TO postgres;
+
+--
+-- TOC entry 166 (class 1259 OID 50575)
+-- Dependencies: 5 167
+-- Name: article_languages_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE article_languages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.article_languages_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1966 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: article_languages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE article_languages_id_seq OWNED BY article_languages.id;
+
+
+--
+-- TOC entry 171 (class 1259 OID 50596)
+-- Dependencies: 5
+-- Name: articles; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE articles (
+    id integer NOT NULL,
+    images character varying(255),
+    enable boolean,
+    category_id integer,
+    priority integer,
+    user_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.articles OWNER TO postgres;
+
+--
+-- TOC entry 170 (class 1259 OID 50594)
+-- Dependencies: 5 171
+-- Name: articles_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE articles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.articles_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1967 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: articles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE articles_id_seq OWNED BY articles.id;
+
+
+--
+-- TOC entry 169 (class 1259 OID 50588)
+-- Dependencies: 5
+-- Name: categories; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE categories (
+    id integer NOT NULL,
+    name character varying(255),
+    parent_id integer,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.categories OWNER TO postgres;
+
+--
+-- TOC entry 168 (class 1259 OID 50586)
+-- Dependencies: 169 5
+-- Name: categories_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE categories_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.categories_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1968 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: categories_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE categories_id_seq OWNED BY categories.id;
+
+
+--
+-- TOC entry 165 (class 1259 OID 50569)
+-- Dependencies: 5
+-- Name: category_languages; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE category_languages (
+    id integer NOT NULL,
+    category_id integer,
+    language_id integer,
+    title character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.category_languages OWNER TO postgres;
+
+--
+-- TOC entry 164 (class 1259 OID 50567)
+-- Dependencies: 5 165
+-- Name: category_languages_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE category_languages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.category_languages_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1969 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: category_languages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE category_languages_id_seq OWNED BY category_languages.id;
+
+
+--
+-- TOC entry 163 (class 1259 OID 50558)
+-- Dependencies: 5
+-- Name: languages; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE languages (
+    id integer NOT NULL,
+    name character varying(255),
+    description character varying(255),
+    language_code character varying(255),
+    enable boolean,
+    "default" boolean,
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone
+);
+
+
+ALTER TABLE public.languages OWNER TO postgres;
+
+--
+-- TOC entry 162 (class 1259 OID 50556)
+-- Dependencies: 163 5
+-- Name: languages_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE languages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.languages_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1970 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: languages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE languages_id_seq OWNED BY languages.id;
+
+
+--
+-- TOC entry 161 (class 1259 OID 50552)
+-- Dependencies: 5
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 50604)
+-- Dependencies: 5
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    name character varying(255),
+    email character varying(255),
+    password_digest character varying(255),
+    created_at timestamp without time zone,
+    updated_at timestamp without time zone,
+    remember_token character varying(255)
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 50602)
+-- Dependencies: 173 5
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 1971 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- TOC entry 1927 (class 2604 OID 50580)
+-- Dependencies: 166 167 167
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY article_languages ALTER COLUMN id SET DEFAULT nextval('article_languages_id_seq'::regclass);
+
+
+--
+-- TOC entry 1929 (class 2604 OID 50599)
+-- Dependencies: 170 171 171
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY articles ALTER COLUMN id SET DEFAULT nextval('articles_id_seq'::regclass);
+
+
+--
+-- TOC entry 1928 (class 2604 OID 50591)
+-- Dependencies: 169 168 169
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY categories ALTER COLUMN id SET DEFAULT nextval('categories_id_seq'::regclass);
+
+
+--
+-- TOC entry 1926 (class 2604 OID 50572)
+-- Dependencies: 164 165 165
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY category_languages ALTER COLUMN id SET DEFAULT nextval('category_languages_id_seq'::regclass);
+
+
+--
+-- TOC entry 1925 (class 2604 OID 50561)
+-- Dependencies: 163 162 163
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY languages ALTER COLUMN id SET DEFAULT nextval('languages_id_seq'::regclass);
+
+
+--
+-- TOC entry 1930 (class 2604 OID 50607)
+-- Dependencies: 173 172 173
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- TOC entry 1951 (class 0 OID 50577)
+-- Dependencies: 167 1958
+-- Data for Name: article_languages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY article_languages (id, article_id, language_id, title, short_description, content, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- TOC entry 1972 (class 0 OID 0)
+-- Dependencies: 166
+-- Name: article_languages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('article_languages_id_seq', 1, false);
+
+
+--
+-- TOC entry 1955 (class 0 OID 50596)
+-- Dependencies: 171 1958
+-- Data for Name: articles; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY articles (id, images, enable, category_id, priority, user_id, created_at, updated_at) FROM stdin;
+1	\N	\N	\N	\N	\N	2013-10-31 02:22:28.931911	2013-10-31 02:22:28.931911
+2	\N	\N	\N	\N	\N	2013-10-31 02:22:59.781871	2013-10-31 02:22:59.781871
+3	\N	\N	\N	\N	\N	2013-10-31 02:25:17.156729	2013-10-31 02:25:17.156729
+\.
+
+
+--
+-- TOC entry 1973 (class 0 OID 0)
+-- Dependencies: 170
+-- Name: articles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('articles_id_seq', 3, true);
+
+
+--
+-- TOC entry 1953 (class 0 OID 50588)
+-- Dependencies: 169 1958
+-- Data for Name: categories; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY categories (id, name, parent_id, created_at, updated_at) FROM stdin;
+1	index	\N	2013-10-28 07:04:00.316314	2013-10-30 10:09:51.289555
+3	services	\N	2013-10-29 08:22:25.625308	2013-10-30 10:10:35.361438
+16	service 1	3	2013-10-31 11:30:03.352371	2013-10-31 11:30:03.352371
+17	service 2	3	2013-10-31 11:30:45.670091	2013-10-31 11:30:45.670091
+\.
+
+
+--
+-- TOC entry 1974 (class 0 OID 0)
+-- Dependencies: 168
+-- Name: categories_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('categories_id_seq', 17, true);
+
+
+--
+-- TOC entry 1949 (class 0 OID 50569)
+-- Dependencies: 165 1958
+-- Data for Name: category_languages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY category_languages (id, category_id, language_id, title, created_at, updated_at) FROM stdin;
+4	1	3	Trang chu	2013-10-30 04:07:45.678725	2013-10-30 08:17:16.217356
+1	1	4	Home	2013-10-30 03:53:55.651834	2013-10-30 08:17:24.388567
+7	3	3	Du an tieng viet	2013-10-30 09:53:42.452349	2013-10-30 09:56:40.845081
+6	3	4	Project english	2013-10-30 09:52:19.611686	2013-11-01 08:22:00.353216
+\.
+
+
+--
+-- TOC entry 1975 (class 0 OID 0)
+-- Dependencies: 164
+-- Name: category_languages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('category_languages_id_seq', 20, true);
+
+
+--
+-- TOC entry 1947 (class 0 OID 50558)
+-- Dependencies: 163 1958
+-- Data for Name: languages; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY languages (id, name, description, language_code, enable, "default", created_at, updated_at) FROM stdin;
+3	Viet Nam	Tieng viet	VN	t	f	2013-10-29 03:15:07.458275	2013-10-29 10:30:53.491583
+4	English	Tieng Anh	EN	t	t	2013-10-29 03:37:00.6853	2013-10-29 10:31:10.438793
+\.
+
+
+--
+-- TOC entry 1976 (class 0 OID 0)
+-- Dependencies: 162
+-- Name: languages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('languages_id_seq', 4, true);
+
+
+--
+-- TOC entry 1945 (class 0 OID 50552)
+-- Dependencies: 161 1958
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY schema_migrations (version) FROM stdin;
+20131026031811
+20131026031840
+20131026031931
+20131026031948
+20131026031959
+20131026032009
+20131029072202
+20131101022047
+20131101032218
+20131101034618
+\.
+
+
+--
+-- TOC entry 1957 (class 0 OID 50604)
+-- Dependencies: 173 1958
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY users (id, name, email, password_digest, created_at, updated_at, remember_token) FROM stdin;
+19	Michael Hartl	tung@rezzcard.com	$2a$10$NGAcH8UZlmA6OKaq45TEkushHYG7YgyGmuip2cFkwGtGtPAAKCSo6	2013-11-01 03:49:23.822779	2013-11-01 09:13:57.774781	18da87419d56714477f43cce0ae410023e54bc4b
+\.
+
+
+--
+-- TOC entry 1977 (class 0 OID 0)
+-- Dependencies: 172
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('users_id_seq', 19, true);
+
+
+--
+-- TOC entry 1937 (class 2606 OID 50585)
+-- Dependencies: 167 167 1959
+-- Name: article_languages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY article_languages
+    ADD CONSTRAINT article_languages_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1941 (class 2606 OID 50601)
+-- Dependencies: 171 171 1959
+-- Name: articles_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY articles
+    ADD CONSTRAINT articles_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1939 (class 2606 OID 50593)
+-- Dependencies: 169 169 1959
+-- Name: categories_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY categories
+    ADD CONSTRAINT categories_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1935 (class 2606 OID 50574)
+-- Dependencies: 165 165 1959
+-- Name: category_languages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY category_languages
+    ADD CONSTRAINT category_languages_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1933 (class 2606 OID 50566)
+-- Dependencies: 163 163 1959
+-- Name: languages_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY languages
+    ADD CONSTRAINT languages_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1944 (class 2606 OID 50612)
+-- Dependencies: 173 173 1959
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 1942 (class 1259 OID 50613)
+-- Dependencies: 173 1959
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
+-- TOC entry 1931 (class 1259 OID 50555)
+-- Dependencies: 161 1959
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
+
+
+--
+-- TOC entry 1964 (class 0 OID 0)
+-- Dependencies: 5
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2013-11-01 17:07:11 ICT
+
+--
+-- PostgreSQL database dump complete
+--
+

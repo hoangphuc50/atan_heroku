@@ -1,0 +1,84 @@
+:javascript
+  jQuery(function(){
+    jQuery("a.page-numbers").filter(function(){
+        return this.href == location.href.replace(/#.*/, "");
+    }).addClass("current");
+  });
+%section.page-title
+  .title.pattern-default
+    %h1
+      =I18n.t('hello')
+    %span.subtitle
+      =I18n.t('en')
+/ content wrapper start
+#content-container
+  / content wrapper start
+  .content-wrapper.clearfix
+    .container_12
+      %section.grid_12.section-title
+        %h3 Our projects
+        / portfolio quicksand filter start
+        %ul#portfolio-filter
+          %li.active
+            = link_to("All",projects_path)
+            \/
+          - @child_projects_category.each do |row|
+            %li
+              = link_to(row.title,projects_path(:id=>row.category_id))
+              -#%a.graphic-design{href: "projects/#{row.id}"}>
+                =row.title
+              \/
+        / portfolio quicksand filter end
+    / container_12 start
+    .container_12
+      / portfolio items list start
+      %ul#filter-item
+        - @projects_list.each do |project|
+
+          %li.grid_4{"data-alpha" => "motion-graphics", "data-id" => "id-1"}
+            / portfolio figure with animation start
+            %figure.portfolio
+              .img-hover.overlay
+                %a.portfolio-image{href: "/project/#{project.id}"}
+                  %img{alt: project.title, src: "/site_images/#{Article.where("id=#{project.article_id}").first().images}", width: "300"}
+                .mask
+                  %a.thumb.info{href: "/project/#{project.id}", title: ""} zoom
+              %figcaption
+                .caption-title
+                  %a{href: "/project/#{project.id}"}
+                    %p.title
+                      =project.title
+                  %p.subtitle
+                    -category_id=Article.where("id=#{project.article_id}").first().category_id
+                    -@category_project_id=category_id
+                    =CategoryLanguage.where("category_id=#{category_id} and language_id=#{@language_id}").first().title
+
+        %li.clear
+      / pagination start
+      -#= paginate @projects_list
+      %ul
+        %li.pagination.portfolio
+          %ul.page-numbers
+            -i=0
+            -@total_page.each do |row|
+              -i=i+1
+              %li
+                -if params[:id]==nil
+                  = link_to(i,projects_path(:page=>i),:class=>"page-numbers page_#{i}")
+                -else
+                  = link_to(i,projects_path(:id=>@category_project_id,:page=>i),:class=>"page-numbers page_#{i}")
+
+
+
+                -#%a.page-numbers{href: "?page=#{i}"}
+                -#  =i
+
+
+            -#%li
+            -#  %span.page-numbers.current 1
+            -#%li
+            -#  %a.page-numbers{href: "?page=2"} 2
+            -#%li
+            -#  %a.next.page-numbers{href: ""}
+    / container_12 end
+  / content-wrapper end

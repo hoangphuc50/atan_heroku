@@ -1,0 +1,43 @@
+%section.page-title
+  .title.pattern-default
+    %h1 News
+    %span.subtitle
+      See the Latest News from Our Company
+/ content wrapper start
+#content-container
+  .content-wrapper.clearfix
+    / container_12 start
+    .container_12
+      .grid_8.content-sidebar-right
+        / blog post start
+        %article#post-149.post-149.post.type-post.status-publish.format-gallery.hentry.category-development.blog-post.no-post-image
+          %section.post-title-container
+            %h3
+              =@article_detail.title
+          / post body start
+          %article.post-body
+            =raw @article_detail.content
+          / post body end
+        / blog post end
+        .divider
+        / post comments start
+      %aside.grid_4.aside.right
+        %ul.aside-widgets
+          %li#list_categories_widget-2.widget.widget_list_categories_widget.clearfix
+            %h5 News Categories
+            %ul
+              -@news_category_all.each do |row|
+                %li
+                  = link_to(row.title,news_path(:id=>row.category_id))
+          %li#archives-2.widget.widget_archive.clearfix
+            %h5 Archive
+            %ul
+              %li
+                %a{href: "", title: "March 2013"} March 2013
+              %li
+                %a{href: "", title: "February 2013"} February 2013
+              %li
+                %a{href: "", title: "January 2013"} January 2013
+      / sidebar end
+    / container_12 end
+  / content-wrapper end

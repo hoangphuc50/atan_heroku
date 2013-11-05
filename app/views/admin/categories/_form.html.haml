@@ -1,0 +1,26 @@
+= content_for :javascripts do
+  = javascript_include_tag 'admin/languages_filter'
+- if @category.errors.any?
+  #error_explanation.notification.information.png_bg
+    %div.flash-notice
+      %h2
+        = pluralize(@category.errors.count, 'error')
+        prohibited this category from being saved:
+      %ul
+        - @category.errors.full_messages.each do |msg|
+          %li= msg
+%fieldset
+  / Set class to "column-left" or "column-right" on fieldsets to divide the form into columns
+  %p
+    %label
+    = f.label :name
+    = f.text_field :name, :class => 'text-input small-input'
+
+  %p
+    %label
+    = f.label :parent_id
+    = f.select :parent_id, Category.order('parent_id desc,name asc').all.collect {|c| [c.name, c.id]} , :prompt => 'Select Category'
+  -#%p
+  -#  %label
+  -#  = f.label :Language_category
+  -#  = f.select :language_id, Language.order('name ASC').all.collect {|c| [c.name, c.id]},:selected => Language.where(:default=>'true').map(&:id), :class => 'language_filter_select'

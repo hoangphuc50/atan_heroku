@@ -1,0 +1,22 @@
+.content-box-header
+  %h3 Change Password
+.content-box-content
+  %form{:action => "update_password", :method => "get"}
+    .notification.information.png_bg
+      - if flash[:error]
+        %div.flash-notice= flash[:error]
+        = yield
+    %p
+      %label Old Password
+      %input.text-input{:type => "password", :name => "old_password"}/
+    .clear
+    %p
+      %label New Password
+      %input.text-input{:type => "password", :name => "password"}/
+    %p
+      %label Confirmation Password
+      %input.text-input{:type => "password", :name => "password_confirmation"}/
+    .clear
+    %p
+      %input.button{:type => "submit", :value => "Save"}/
+      %input.button{:type=>"button",:onclick=>"history.back()", :value => "Back"}/

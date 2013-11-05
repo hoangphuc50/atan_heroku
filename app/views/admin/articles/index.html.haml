@@ -1,0 +1,45 @@
+.content-box-header
+  %h3 Listing articles
+.content-box-content
+  = link_to 'New Article', new_admin_article_path(:id_cate=> params[:id_cate]) ,:class => 'button'
+  %label
+    = label_tag :category
+    = select_tag :category_id, options_for_select(Category.all.collect{|b| [b.name,b.id]},params[:id_cate]),
+      :id => "cbx_category", :class => "category_select", :prompt => "Select category"
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}
+        %th Name
+        - @language=Language.all
+        - @language.each do |language|
+          %th
+            =language.language_code
+        %th Actions
+    %tfoot
+      %tr
+        %td{:colspan => '6'}
+          .clear
+    %tbody
+      - unless @articles.nil?
+        - @articles.each do |article|
+          %tr
+            %td
+              %input{:type => 'checkbox'}/
+            %td
+              = link_to(article.name, admin_article_path(:id_cate=> params[:id_cate],:id => article.id))
+            %td= article.try(:name)
+            - @language=Language.all
+            - @language.each do |language|
+              %th
+                - @article_language=ArticleLanguage.where(:article_id=>article.id,:language_id=>language.id).first()
+                -if @article_language.nil?
+                  = link_to(image_tag('admin/icon_add.png'), new_admin_article_language_path(:id=>article.id,:id_lang=>language.id))
+                -else
+                  = link_to(image_tag('admin/icon_edit.gif'), edit_admin_article_language_path(@article_language))
+            %td
+              / Icons
+              = link_to(image_tag('admin/icon_view.gif'), admin_article_path(article))
+              = link_to(image_tag('admin/icon_edit.gif'), edit_admin_article_path(:id_cate=> params[:id_cate],:id => article.id))
+              = link_to(image_tag('admin/icon_delete.gif'), admin_article_path(article), :confirm => 'Are You sure?', :method => :delete)

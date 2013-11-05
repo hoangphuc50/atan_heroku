@@ -1,0 +1,45 @@
+.content-box-header
+  %h3 Listing users
+.content-box-content
+  = link_to 'New User', new_admin_user_path ,:class => 'button'
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}/
+        %th Name
+        %th Email
+        %th Actions
+    -#%tfoot
+    -#  %tr
+    -#    %td{:colspan => '6'}
+    -#      .bulk-actions.align-left
+    -#        %select{:name => 'dropdown'}
+    -#          %option{:value => 'option1'} Choose an action...
+    -#          %option{:value => 'option2'} Edit
+    -#          %option{:value => 'option3'} Delete
+    -#        %a.button{:href => '#'} Apply to selected
+    -#      .pagination
+    -#        %a{:href => '#', :title => 'First Page'} &laquo; First
+    -#        %a{:href => '#', :title => 'Previous Page'} &laquo; Previous
+    -#        %a.number{:href => '#', :title => '1'} 1
+    -#        %a.number{:href => '#', :title => '2'} 2
+    -#        %a.number.current{:href => '#', :title => '3'} 3
+    -#        %a.number{:href => '#', :title => '4'} 4
+    -#        %a{:href => '#', :title => 'Next Page'} Next &raquo;
+    -#        %a{:href => '#', :title => 'Last Page'} Last &raquo;
+    -#      / End .pagination
+    -#      .clear
+    %tbody
+      - @users.each do |user|
+        %tr
+          %td
+            %input{:type => 'checkbox'}/
+          %td
+            = link_to(user.name, admin_user_path(user))
+          %td= user.email
+          %td
+            / Icons
+            = link_to(image_tag('admin/icon_view.gif'), admin_user_path(user))
+            = link_to(image_tag('admin/icon_edit.gif'), edit_admin_user_path(user))
+            = link_to(image_tag('admin/icon_delete.gif'), admin_user_path(user), :confirm => 'Are you sure?', :method => :delete)

@@ -1,0 +1,179 @@
+/* 
+    Document   : styleSwitcher
+    Created on : 11.08.2012., 16:41:51
+    Author     : Pixel Industry
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#style-switcher{
+    position: fixed;
+    left: -140px;
+    top: 200px;
+    background: #fff;
+    width: 135px;
+    height: 420px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    box-shadow: 2px 2px 2px #888;
+    z-index: 999;
+    border: 1px solid #e4e4e4;
+}
+
+#style-switcher #styles-container,
+#style-switcher #patterns-container{
+    padding: 15px 15px 0;
+}
+
+#style-switcher #styles-container section{
+    margin-bottom: 10px;
+    position: relative;
+}
+
+#style-switcher h6{
+    font: 12px Trebuchet MS;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+#style-switcher #styles-button{
+    width: 20px;
+    height: 100px;
+    position: absolute;
+    top: 20px;
+    right: -30px;
+
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 5px;
+    box-shadow: 2px 2px 2px #888;
+
+    background: #ffffff; /* Old browsers */
+    background: -moz-linear-gradient(left, #ffffff 0%, #fcfcfc 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%,#ffffff), color-stop(100%,#fcfcfc)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(left, #ffffff 0%,#fcfcfc 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, #ffffff 0%,#fcfcfc 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, #ffffff 0%,#fcfcfc 100%); /* IE10+ */
+    background: linear-gradient(to right, #ffffff 0%,#fcfcfc 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fcfcfc',GradientType=1 ); /* IE6-9 */
+}
+
+#style-switcher #styles-button #switcher-logo{
+    background: url(img/logo.png) center center no-repeat;
+    width: 20px;
+    height: 100px;
+    background-size: 18px;
+}
+
+#style-switcher .styles-list{
+    overflow: hidden;
+}
+
+#style-switcher .styles-list li{
+    float: left;
+    width: 40px;
+    height: 30px;
+
+    text-indent: -9999px;
+    margin: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+#style-switcher .styles-list li:hover{
+    opacity: 0.9;
+}
+
+/*************************
+    CUSTOM THEME STYLES
+**************************/
+
+
+/*  STYLES   */
+
+#style-switcher .styles-list .blue{
+    background: #009fe3;
+    box-shadow: 0 0 2px #c6fdfb;
+}
+
+#style-switcher .styles-list .gold{
+    background: #eca900;
+    box-shadow: 0 0 2px #fbe1c7;
+}
+
+#style-switcher .styles-list .green{
+    background: #a0cf4f;
+    box-shadow: 0 0 2px #baf5f9;
+}
+
+#style-switcher .styles-list .pink{
+    background: #E80C7A;
+    box-shadow: 0 0 2px #cbfdd6;
+}
+
+#style-switcher .styles-list .red{
+    background: #db6361;
+    box-shadow: 0 0 2px #cbfed6;
+}
+
+#style-switcher .styles-list .teal{
+    background: #038c7f;
+    box-shadow: 0 0 2px #fcd0c0;
+}
+
+/* PATTERNS */
+
+#style-switcher .patterns-list{
+    overflow: hidden;
+}
+
+#style-switcher .patterns-list li{
+    float: left;
+    width: 40px;
+    height: 30px;
+    border: 1px solid #ccc;
+
+    text-indent: -9999px;
+    margin: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+#style-switcher .patterns-list li:hover{
+    opacity: 0.6;
+}
+
+#style-switcher .patterns-list .pattern-default{
+    background: url('../admin/images/patterns/default.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-ecailles{
+    background: url('../admin/images/patterns/ecailles.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-fabric_of_squares_gray{
+    background: url('../admin/images/patterns/fabric_of_squares_gray.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-gray_jean{
+    background: url('../admin/images/patterns/gray_jean.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-grey{
+    background: url('../admin/images/patterns/grey.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-knitting250px{
+    background: url('../admin/images/patterns/knitting250px.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-p6{
+    background: url('../admin/images/patterns/p6.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-paper_fibers{
+    background: url('../admin/images/patterns/paper_fibers.png') repeat;
+}
+
+#style-switcher .patterns-list .pattern-pw_maze_white{
+    background: url('../admin/images/patterns/pw_maze_white.png') repeat;
+}

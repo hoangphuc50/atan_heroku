@@ -1,0 +1,17 @@
+
+- if form.object.errors.size > 0
+  .line
+    = form.error_messages
+%p
+  %span.wpcf7-form-control-wrap.your-name
+    = form.text_field :first_name,:class => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required text',:value=>"Your First Name"
+  %span.wpcf7-form-control-wrap.your-last-name
+    = form.text_field :last_name,:class => 'wpcf7-form-control wpcf7-text wpcf7-validates-as-required text',:value=>"Your Last Name"
+  %span.wpcf7-form-control-wrap.your-email
+    = form.text_field :email,:class => 'wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-required wpcf7-validates-as-email email',:value=>"Your Email"
+  %br/
+  %span.wpcf7-form-control-wrap.your-message
+    = form.text_area :message,:class=>"wpcf7-form-control wpcf7-textarea textarea",:cols=>"40",:rows=>"10"
+  %br/
+  #error_messages
+  %input.wpcf7-form-control.wpcf7-submit.submit{type: "submit", value: "Send Message"}/

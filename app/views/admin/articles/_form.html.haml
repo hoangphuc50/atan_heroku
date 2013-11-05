@@ -1,0 +1,37 @@
+= content_for :javascripts do
+  = javascript_include_tag 'admin/languages_filter'
+
+- if @article.errors.any?
+  #error_explanation.notification.information.png_bg
+    %div.flash-notice
+      %h2
+        = pluralize(@article.errors.count, 'error')
+        prohibited this article from being saved:
+      %ul
+        - @article.errors.full_messages.each do |msg|
+          %li= msg
+%fieldset
+  / Set class to "column-left" or "column-right" on fieldsets to divide the form into columns
+  %p
+    %label
+    = f.label :name
+    = f.text_field :name, :class => 'text-input small-input'
+
+  %p
+    %label
+    = f.label :category_id
+    = f.select :category_id, options_for_select(Category.all.collect {|c| [c.name, c.id]},params[:id_cate])
+
+  %p
+    %label
+    = f.label :Image
+    = f.file_field 'images'
+
+    %p
+      %label
+      = f.label :enable
+      = f.check_box :enable, :checked => true
+  -#%p
+  -#  %label
+  -#  = f.label :Language_category
+  -#  = f.select :language_id, Language.order('name ASC').all.collect {|c| [c.name, c.id]},:selected => Language.where(:default=>'true').map(&:id), :class => 'language_filter_select'

@@ -1,0 +1,2 @@
+= f.label :title
+= f.text_field :title,:value => CategoryLanguage.where(:language_id=>params[:category][:language_id],:category_id=>params[:id]).map(&:title), :class => 'text-input small-input'

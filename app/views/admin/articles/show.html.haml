@@ -1,0 +1,37 @@
+.content-box-header
+  %h3 Detail article #{@article.name}
+.content-box-content
+  %p
+    %strong Name:
+    = @article.name
+  %p
+  = link_to 'New article language', new_admin_article_language_path(:id => params[:id],:id_cate => params[:id_cate]) ,:class => 'button'
+  - @article_language=ArticleLanguage.where(:article_id=>@article.id)
+  %table
+    %thead
+      %tr
+        %th
+          %input.check-all{:type => 'checkbox'}
+        /%th article
+        %th Language
+        %th Title
+        %th Actions
+    %tfoot
+      %tr
+        %td{:colspan => '6'}
+          .clear
+    %tbody
+      - @article_language.each do |article_language|
+        %tr
+          %td
+            %input{:type => 'checkbox'}
+          /%td= article_language.article.try(:name)
+          %td= article_language.language.try(:name)
+          %td= article_language.title
+          %td
+            / Icons
+            /= link_to(image_tag('admin/icon_view.gif'), admin_article_language_path(article_language))
+            = link_to(image_tag('admin/icon_edit.gif'), edit_admin_article_language_path(:id_arti => params[:id],:id_cate => params[:id_cate],:id => article_language.id,:action=>'edit'))
+            = link_to(image_tag('admin/icon_delete.gif'), admin_article_language_path(article_language), :confirm => 'Are You sure?', :method => :delete)
+  = link_to 'Edit', edit_admin_article_path(@article),:class => 'button'
+  = link_to 'Back', admin_articles_path(:id_cate => params[:id_cate]),:class => 'button'
